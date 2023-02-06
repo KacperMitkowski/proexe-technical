@@ -7,7 +7,6 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useGlobalStyles } from "../../styles/styles";
-import { makeStyles } from "@mui/styles";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import GroupIcon from "@mui/icons-material/Group";

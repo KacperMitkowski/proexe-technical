@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Layout } from "./components/layout";
-import { Main } from "./components/main";
+import { UsersList } from "./components/usersList";
 import { ThemeContext } from "./contexts/themeContext";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
       <Layout>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<UsersList />} />
           </Routes>
         </BrowserRouter>
       </Layout>

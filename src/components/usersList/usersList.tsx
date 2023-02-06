@@ -4,14 +4,10 @@ import {
   Grid,
   Paper,
   Table,
-  TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
-  TableRow,
   Typography,
 } from "@mui/material";
-import { useCallback, useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
 import { PageHelper } from "../../helpers";
 import { useFacadeUserAPI } from "../../hooks";
@@ -22,9 +18,10 @@ import {
   LIGHT_MODE_FONT_COLOR,
 } from "../../styles/consts";
 import { useGlobalStyles } from "../../styles/styles";
-import { User } from "../../types";
+import { Order, User } from "../../types";
+import { EnhancedTableBody, EnhancedTableHead } from ".";
 
-export const Main = () => {
+export const UsersList = () => {
   const { isDarkTheme } = useContext(ThemeContext);
   const themeStyles = {
     color: isDarkTheme ? DARK_MODE_FONT_COLOR : LIGHT_MODE_FONT_COLOR,
@@ -37,10 +34,22 @@ export const Main = () => {
   const { users, error, actionExecuting, createUser, deleteUser, getUsers } =
     userFacade;
 
+  const [order, setOrder] = useState<Order>("asc");
+  const [orderBy, setOrderBy] = useState<keyof User>("id");
+
   useEffect(() => {
     const fetchUsers = async () => await getUsers();
     fetchUsers();
   }, []);
+
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof User
+  ) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
 
   return actionExecuting ? (
     <Grid container className={globalClasses.fullHeight}>
@@ -82,43 +91,18 @@ export const Main = () => {
 
       <TableContainer component={Paper} style={themeStyles}>
         <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={themeStyles}>Id</TableCell>
-              <TableCell style={themeStyles}>Name</TableCell>
-              <TableCell style={themeStyles}>Username</TableCell>
-              <TableCell style={themeStyles}>Email</TableCell>
-              <TableCell style={themeStyles}>City</TableCell>
-              <TableCell>&nbsp;</TableCell>
-              <TableCell>&nbsp;</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((user: User) => {
-              return (
-                <TableRow
-                  key={user.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell style={themeStyles} scope="row">
-                    {user.id}
-                  </TableCell>
-                  <TableCell style={themeStyles}>{user.name}</TableCell>
-                  <TableCell style={themeStyles}>{user.username}</TableCell>
-                  <TableCell style={themeStyles}>{user.email}</TableCell>
-                  <TableCell style={themeStyles}>
-                    {user?.address?.city}
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="contained">Edit</Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="contained">Delete</Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            themeStyles={themeStyles}
+          />
+          <EnhancedTableBody
+            order={order}
+            orderBy={orderBy}
+            users={users}
+            themeStyles={themeStyles}
+          />
         </Table>
       </TableContainer>
     </Grid>

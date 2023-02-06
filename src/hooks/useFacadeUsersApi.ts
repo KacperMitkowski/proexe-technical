@@ -14,7 +14,13 @@ export const useFacadeUserAPI = () => {
         "https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data"
         // "https://my-json-server.typicode.com/sad/jsonplaceholderdb/data"
       );
-      setUsers(resp.data);
+
+      const arr = resp.data?.map((user: any) => ({
+        ...user,
+        city: user.address.city,
+      }));
+
+      setUsers(arr);
     } catch (error) {
       const err = error as AxiosError;
       setError(err);
