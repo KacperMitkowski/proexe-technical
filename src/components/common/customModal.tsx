@@ -1,4 +1,4 @@
-import { Box, Card, Modal } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 
 interface IProps {
   modalOpen: boolean;
