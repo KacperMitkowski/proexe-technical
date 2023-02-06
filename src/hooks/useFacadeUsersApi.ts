@@ -46,7 +46,7 @@ export const useFacadeUserAPI = () => {
   async function deleteUser(id: string) {
     setActionExecuting(true);
     try {
-      await axios.delete(`/api/users/${id}`);
+      // await axios.delete("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data");
       setUsers(users.filter((user: any) => user.id !== id));
     } catch (error) {
       const err = error as AxiosError;

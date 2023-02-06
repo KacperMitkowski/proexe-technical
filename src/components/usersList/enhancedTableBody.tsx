@@ -7,6 +7,7 @@ interface IProps {
   orderBy: string;
   users: User[];
   themeStyles: object;
+  handleDelete: (id: string) => Promise<void>;
 }
 
 export const EnhancedTableBody = ({
@@ -14,6 +15,7 @@ export const EnhancedTableBody = ({
   orderBy,
   users,
   themeStyles,
+  handleDelete,
 }: IProps) => {
   return (
     <TableBody>
@@ -36,7 +38,12 @@ export const EnhancedTableBody = ({
             <Button variant="contained">Edit</Button>
           </TableCell>
           <TableCell>
-            <Button variant="contained">Delete</Button>
+            <Button
+              variant="contained"
+              onClick={() => handleDelete(user?.id as string)}
+            >
+              Delete
+            </Button>
           </TableCell>
         </TableRow>
       ))}

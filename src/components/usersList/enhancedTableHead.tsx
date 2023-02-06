@@ -1,10 +1,4 @@
-import {
-  Box,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-} from "@mui/material";
+import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import { TableHelper } from "../../helpers";
 import { Order, User } from "../../types";
 

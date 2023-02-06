@@ -30,7 +30,7 @@ export class TableHelper {
       id: "city",
       numeric: false,
       disablePadding: false,
-      label: "Address",
+      label: "City",
     },
   ];
 
