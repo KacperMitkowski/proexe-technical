@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Grid } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { Navbar } from ".";
 
 interface IProps {
@@ -12,7 +12,7 @@ export const Layout = ({ children }: IProps) => {
 
       <Navbar />
 
-      <Grid container>{children}</Grid>
+      {children}
     </Box>
   );
 };

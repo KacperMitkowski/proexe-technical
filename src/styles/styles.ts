@@ -4,9 +4,6 @@ import { makeStyles } from "@mui/styles";
 export const useGlobalStyles = makeStyles((theme: Theme) => ({
   drawer: {
     flexShrink: 0,
-    "& .MuiDrawer-paper": {
-      backgroundColor: "#efefef",
-    },
   },
   resetPadding: {
     padding: 0,
@@ -26,5 +23,10 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
 
   fullWidth: {
     width: "100%",
+  },
+
+  button: {
+    height: 50,
+    width: 150,
   },
 }));
