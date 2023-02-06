@@ -23,17 +23,7 @@ import {
 } from "../../styles/consts";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
-
-const useLocalStyles = makeStyles((darkTheme: boolean) => ({
-  navbarItem: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    "&:hover": {
-      backgroundColor: "#4A4A4A",
-    },
-  },
-}));
+import { useLocalStyles } from ".";
 
 export const Navbar = () => {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);

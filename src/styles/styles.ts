@@ -25,8 +25,18 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
     width: "100%",
   },
 
+  fullHeight: {
+    height: "100vh",
+  },
+
   button: {
     height: 50,
     width: 150,
+  },
+
+  flexWithCentralize: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));

@@ -6,7 +6,7 @@ import { Main } from "./components/main";
 import { ThemeContext } from "./contexts/themeContext";
 
 const App = () => {
-  const [isDarkTheme, setDarkTheme] = useState(false);
+  const [isDarkTheme, setDarkTheme] = useState<boolean>(false);
   const toggleTheme = () => setDarkTheme((prevDarkTheme) => !prevDarkTheme);
 
   return (
