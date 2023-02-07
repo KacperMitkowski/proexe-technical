@@ -41,7 +41,7 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
       modalOpen={commonContext.globalState.isNewUserModalOpen}
       close={() => {
         commonContext.dispatch({
-          type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+          type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
         });
         resetUser();
       }}
@@ -87,7 +87,7 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           onClick={async () => {
             await callbackAfterConfirmClick(newUser);
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
             });
             commonContext.dispatch({
               type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
@@ -102,7 +102,7 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Button
           onClick={() => {
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
             });
             resetUser();
           }}

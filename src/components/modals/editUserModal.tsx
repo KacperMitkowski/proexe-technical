@@ -42,7 +42,10 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
       modalOpen={commonContext.globalState.isEditUserModalOpen}
       close={() => {
         commonContext.dispatch({
-          type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
+          type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+        });
+        commonContext.dispatch({
+          type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
         });
       }}
       customClass={globalClasses.editUserModal}
@@ -115,7 +118,10 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           onClick={async () => {
             await callbackAfterConfirmClick(editedUser);
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+            });
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
             });
             commonContext.dispatch({
               type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
@@ -129,7 +135,10 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Button
           onClick={() => {
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+            });
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
             });
           }}
           variant="outlined"

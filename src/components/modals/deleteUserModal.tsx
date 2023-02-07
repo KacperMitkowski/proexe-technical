@@ -16,11 +16,14 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
   return (
     <CustomModal
       modalOpen={commonContext.globalState.isDeleteUsersModalOpen}
-      close={() =>
+      close={() => {
         commonContext.dispatch({
-          type: COMMON_ACTIONS.CLOSE_DELETE_USERS_MODAL_ACTION,
-        })
-      }
+          type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
+        });
+        commonContext.dispatch({
+          type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+        });
+      }}
       customClass={globalClasses.deleteUserModal}
     >
       <Typography variant="h5" mb={2}>
@@ -33,7 +36,10 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           onClick={() => {
             callbackAfterConfirmClick();
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_DELETE_USERS_MODAL_ACTION,
+              type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
+            });
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
             });
             commonContext.dispatch({
               type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
@@ -45,11 +51,14 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           Yes
         </Button>
         <Button
-          onClick={() =>
+          onClick={() => {
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_DELETE_USERS_MODAL_ACTION,
-            })
-          }
+              type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
+            });
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+            });
+          }}
           variant="contained"
         >
           No

@@ -20,14 +20,14 @@ export const initialState: ICommonState = {
 
 export const COMMON_ACTIONS = {
   OPEN_DELETE_USERS_MODAL_ACTION: "OPEN_DELETE_USERS_MODAL_ACTION",
-  CLOSE_DELETE_USERS_MODAL_ACTION: "CLOSE_DELETE_USERS_MODAL_ACTION",
+  RESET_DELETED_USER_ID_ACTION: "RESET_DELETED_USER_ID_ACTION",
   OPEN_NEW_USER_MODAL_ACTION: "OPEN_NEW_USER_MODAL_ACTION",
-  CLOSE_NEW_USER_MODAL_ACTION: "CLOSE_NEW_USER_MODAL_ACTION",
   OPEN_EDIT_USER_MODAL_ACTION: "OPEN_EDIT_USER_MODAL_ACTION",
-  CLOSE_EDIT_USER_MODAL_ACTION: "CLOSE_EDIT_USER_MODAL_ACTION",
+  RESET_EDITED_USER_MODAL_ACTION: "RESET_EDITED_USER_MODAL_ACTION",
   SET_EDITED_USER_ACTION: "SET_EDITED_USER_ACTION",
   OPEN_NOTIFICATION_MODAL_ACTION: "OPEN_NOTIFICATION_MODAL_ACTION",
   CLOSE_NOTIFICATION_MODAL_ACTION: "CLOSE_NOTIFICATION_MODAL_ACTION",
+  CLOSE_ALL_MODALS_ACTION: "CLOSE_ALL_MODALS_ACTION",
 };
 
 export interface IAction {
@@ -46,10 +46,9 @@ export const commonReducer = (
         isDeleteUsersModalOpen: true,
         deletedUserId: action.payload.userId,
       };
-    case COMMON_ACTIONS.CLOSE_DELETE_USERS_MODAL_ACTION:
+    case COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION:
       return {
         ...state,
-        isDeleteUsersModalOpen: false,
         deletedUserId: null,
       };
     case COMMON_ACTIONS.OPEN_NEW_USER_MODAL_ACTION:
@@ -57,21 +56,15 @@ export const commonReducer = (
         ...state,
         isNewUserModalOpen: true,
       };
-    case COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION:
-      return {
-        ...state,
-        isNewUserModalOpen: false,
-      };
     case COMMON_ACTIONS.OPEN_EDIT_USER_MODAL_ACTION:
       return {
         ...state,
         isEditUserModalOpen: true,
         editedUser: action.payload.user,
       };
-    case COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION:
+    case COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION:
       return {
         ...state,
-        isEditUserModalOpen: false,
         editedUser: null,
       };
     case COMMON_ACTIONS.SET_EDITED_USER_ACTION:
@@ -89,6 +82,15 @@ export const commonReducer = (
         ...state,
         isNotificationModalOpen: false,
       };
+    case COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION:
+      return {
+        ...state,
+        isNewUserModalOpen: false,
+        isEditUserModalOpen: false,
+        isDeleteUsersModalOpen: false,
+        isNotificationModalOpen: false,
+      };
+
     default:
       return state;
   }
