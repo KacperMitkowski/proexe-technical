@@ -125,7 +125,7 @@ export const UsersList = () => {
         </Grid>
 
         {users.length !== 0 ? (
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <TableContainer component={Paper} style={themeStyles}>
               <Table aria-label="simple table">
                 <EnhancedTableHead

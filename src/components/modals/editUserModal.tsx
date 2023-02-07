@@ -48,7 +48,7 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
       customClass={globalClasses.editUserModal}
     >
       <Typography variant="h4" mb={2}>
-        Form
+        Edit User
       </Typography>
 
       <Grid container>

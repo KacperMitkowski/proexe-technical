@@ -38,7 +38,7 @@ export const EnhancedTableBody = ({
             <TableCell style={themeStyles}>{user.username}</TableCell>
             <TableCell style={themeStyles}>{user.email}</TableCell>
             <TableCell style={themeStyles}>{user.city}</TableCell>
-            <TableCell>
+            <TableCell style={themeStyles}>
               <Button
                 onClick={() =>
                   commonContext.dispatch({

@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import { API_URL, FAKE_API_URL } from "../consts";
 import { SortingHelper } from "../helpers";
 import { User } from "../types";
 
@@ -11,17 +12,17 @@ export const useFacadeUserAPI = () => {
   async function getUsers() {
     setActionExecuting(true);
     try {
-      const resp = await axios.get(
-        "https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data"
-        // "https://my-json-server.typicode.com/sad/jsonplaceholderdb/data"
+      const response = await axios.get(
+        API_URL
+        // FAKE_API_URL
       );
 
-      const arr = resp.data?.map((user: any) => ({
+      const newUsers = response.data?.map((user: any) => ({
         ...user,
         city: user.address.city,
       }));
 
-      setUsers(arr);
+      setUsers(newUsers);
     } catch (error) {
       const err = error as AxiosError;
       setError(err);
@@ -30,14 +31,14 @@ export const useFacadeUserAPI = () => {
     }
   }
 
-  async function createUser(user: any) {
+  async function createUser(newUser: any) {
     setActionExecuting(true);
     try {
-      // await axios.post("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data", user);
+      // await axios.post(FAKE_API_URL, user);
       const sortedUsers = [...users].sort(SortingHelper.compareById);
       const fakeNewId = (sortedUsers.at(-1)?.id || 0) + 1;
 
-      setUsers([...users, { ...user, id: fakeNewId }]);
+      setUsers([...users, { ...newUser, id: fakeNewId }]);
     } catch (error) {
       const err = error as AxiosError;
       setError(err);
@@ -46,14 +47,13 @@ export const useFacadeUserAPI = () => {
     }
   }
 
-  async function editUser(user: User) {
+  async function editUser(editedUser: User) {
     setActionExecuting(true);
     try {
-      // await axios.put("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data", user);
-
+      // await axios.put(FAKE_API_URL, user);
       const newUsers = [...users];
-      const objIndex = users.findIndex((obj) => obj.id === user.id);
-      newUsers[objIndex] = user;
+      const objIndex = users.findIndex((obj) => obj.id === editedUser.id);
+      newUsers[objIndex] = editedUser;
 
       setUsers(newUsers);
     } catch (error) {
@@ -67,7 +67,8 @@ export const useFacadeUserAPI = () => {
   async function deleteUser(id: string) {
     setActionExecuting(true);
     try {
-      // await axios.delete("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data", id);
+      // await axios.delete(`${FAKE_API_URL}/${id}`);
+
       setUsers(users.filter((user: any) => user.id !== id));
     } catch (error) {
       const err = error as AxiosError;

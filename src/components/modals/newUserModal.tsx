@@ -48,7 +48,7 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
       customClass={globalClasses.newUserModal}
     >
       <Typography variant="h4" mb={2}>
-        Form
+        New User
       </Typography>
 
       <Grid container>
