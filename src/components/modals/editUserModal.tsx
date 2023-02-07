@@ -1,10 +1,9 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CommonContext } from "../../contexts";
 import { EmailHelper } from "../../helpers";
 import { COMMON_ACTIONS } from "../../reducers";
 import { useGlobalStyles } from "../../styles/styles";
-import { User } from "../../types";
 import { CustomModal } from "../common";
 
 interface IProps {
@@ -13,39 +12,40 @@ interface IProps {
 
 const HELPER_TEXT = "Required field";
 
-export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
+export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
   const commonContext = useContext(CommonContext);
   const globalClasses = useGlobalStyles();
-  const [newUser, setNewUser] = useState<User>(new User());
+  const editedUser = commonContext.globalState.editedUser;
 
   const handleInputChange = (event) => {
-    const changedNewUser = { ...newUser };
+    const changedNewUser = { ...editedUser };
     changedNewUser[event.target.name] = event.target.value;
-    setNewUser(changedNewUser);
-  };
 
-  const resetUser = () => {
-    setNewUser(new User());
+    commonContext.dispatch({
+      type: COMMON_ACTIONS.SET_EDITED_USER_ACTION,
+      payload: changedNewUser,
+    });
   };
 
   const isFormDisabled = () => {
     return (
-      newUser.name?.trim() === "" ||
-      newUser.email?.trim() === "" ||
-      !EmailHelper.isEmailOk(newUser.email?.trim())
+      editedUser?.name?.trim() === "" ||
+      editedUser?.email?.trim() === "" ||
+      !EmailHelper.isEmailOk(editedUser?.email?.trim()) ||
+      editedUser?.username?.trim() === "" ||
+      editedUser?.city?.trim() === ""
     );
   };
 
   return (
     <CustomModal
-      modalOpen={commonContext.globalState.isNewUserModalOpen}
+      modalOpen={commonContext.globalState.isEditUserModalOpen}
       close={() => {
         commonContext.dispatch({
-          type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+          type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
         });
-        resetUser();
       }}
-      customClass={globalClasses.newUserModal}
+      customClass={globalClasses.editUserModal}
     >
       <Typography variant="h4" mb={2}>
         Form
@@ -55,8 +55,9 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Grid item xs={12} mb={1}>
           <TextField
             fullWidth
-            error={newUser.name?.trim() === ""}
-            value={newUser.name}
+            autoFocus
+            error={editedUser?.name?.trim() === ""}
+            value={editedUser?.name}
             name="name"
             onChange={handleInputChange}
             label="Name"
@@ -67,14 +68,41 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Grid item xs={12} mt={1}>
           <TextField
             fullWidth
+            autoFocus
             error={
-              newUser.email?.trim() === "" ||
-              !EmailHelper.isEmailOk(newUser.email)
+              editedUser?.email?.trim() === "" ||
+              !EmailHelper.isEmailOk(
+                commonContext.globalState?.editedUser?.email
+              )
             }
-            value={newUser.email}
+            value={editedUser?.email}
             name="email"
             onChange={handleInputChange}
             label="Email"
+            helperText={HELPER_TEXT}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} mt={1}>
+          <TextField
+            fullWidth
+            error={editedUser?.username?.trim() === ""}
+            value={editedUser?.username}
+            name="username"
+            onChange={handleInputChange}
+            label="Username"
+            helperText={HELPER_TEXT}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} mt={1}>
+          <TextField
+            fullWidth
+            error={editedUser?.city?.trim() === ""}
+            value={editedUser?.city}
+            name="city"
+            onChange={handleInputChange}
+            label="City"
             helperText={HELPER_TEXT}
             required
           />
@@ -85,14 +113,13 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Button
           disabled={isFormDisabled()}
           onClick={async () => {
-            await callbackAfterConfirmClick(newUser);
+            await callbackAfterConfirmClick(editedUser);
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
             });
             commonContext.dispatch({
               type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
             });
-            resetUser();
           }}
           variant="contained"
           style={{ backgroundColor: "#28c96e", marginRight: 10 }}
@@ -102,9 +129,8 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Button
           onClick={() => {
             commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_NEW_USER_MODAL_ACTION,
+              type: COMMON_ACTIONS.CLOSE_EDIT_USER_MODAL_ACTION,
             });
-            resetUser();
           }}
           variant="outlined"
         >

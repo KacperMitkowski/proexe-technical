@@ -1,16 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import { SortingHelper } from "../helpers";
 import { User } from "../types";
-
-const compare = (a: User, b: User) => {
-  if (a.id < b.id) {
-    return -1;
-  }
-  if (a.id > b.id) {
-    return 1;
-  }
-  return 0;
-};
 
 export const useFacadeUserAPI = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -43,13 +34,30 @@ export const useFacadeUserAPI = () => {
     setActionExecuting(true);
     try {
       // await axios.post("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data", user);
-      const sortedUsers = [...users].sort(compare);
-      const fakeNewId = sortedUsers.at(-1).id + 1;
+      const sortedUsers = [...users].sort(SortingHelper.compareById);
+      const fakeNewId = (sortedUsers.at(-1)?.id || 0) + 1;
 
       setUsers([...users, { ...user, id: fakeNewId }]);
     } catch (error) {
       const err = error as AxiosError;
-      console.log(err);
+      setError(err);
+    } finally {
+      setActionExecuting(false);
+    }
+  }
+
+  async function editUser(user: User) {
+    setActionExecuting(true);
+    try {
+      // await axios.put("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data", user);
+
+      const newUsers = [...users];
+      const objIndex = users.findIndex((obj) => obj.id === user.id);
+      newUsers[objIndex] = user;
+
+      setUsers(newUsers);
+    } catch (error) {
+      const err = error as AxiosError;
       setError(err);
     } finally {
       setActionExecuting(false);
@@ -63,7 +71,6 @@ export const useFacadeUserAPI = () => {
       setUsers(users.filter((user: any) => user.id !== id));
     } catch (error) {
       const err = error as AxiosError;
-      console.log(err);
       setError(err);
     } finally {
       setActionExecuting(false);
@@ -76,6 +83,7 @@ export const useFacadeUserAPI = () => {
     actionExecuting,
     getUsers,
     createUser,
+    editUser,
     deleteUser,
   };
 };

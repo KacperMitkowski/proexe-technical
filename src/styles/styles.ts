@@ -63,4 +63,16 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
     top: "25vh",
     left: "70vh",
   },
+
+  editUserModal: {
+    position: "absolute" as "absolute",
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "10px",
+
+    width: "30%",
+    height: "50%",
+    top: "25vh",
+    left: "70vh",
+  },
 }));

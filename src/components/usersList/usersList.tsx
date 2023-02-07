@@ -19,11 +19,21 @@ import {
 } from "../../styles/consts";
 import { useGlobalStyles } from "../../styles/styles";
 import { Order, User } from "../../types";
-import { EnhancedTableBody, EnhancedTableHead, useLocalStyles } from ".";
+import {
+  EnhancedTableBody,
+  EnhancedTableHead,
+  NoUsers,
+  useLocalStyles,
+} from ".";
 import { CustomModal, ErrorMessage, Spinner } from "../common";
 import { CommonContext } from "../../contexts";
 import { COMMON_ACTIONS } from "../../reducers/commonReducer";
-import { DeleteUserModal, NewUserModal, Notification } from "../modals";
+import {
+  DeleteUserModal,
+  EditUserModal,
+  NewUserModal,
+  Notification,
+} from "../modals";
 
 const refreshPageHandler = () => PageHelper.refreshPage();
 
@@ -40,8 +50,15 @@ export const UsersList = () => {
 
   // api
   const userFacade = useFacadeUserAPI();
-  const { users, error, actionExecuting, createUser, deleteUser, getUsers } =
-    userFacade;
+  const {
+    users,
+    error,
+    actionExecuting,
+    getUsers,
+    createUser,
+    editUser,
+    deleteUser,
+  } = userFacade;
 
   // state
   const commonContext = useContext(CommonContext);
@@ -113,22 +130,26 @@ export const UsersList = () => {
           </Button>
         </Grid>
 
-        <TableContainer component={Paper} style={themeStyles}>
-          <Table aria-label="simple table">
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleSort}
-              themeStyles={themeStyles}
-            />
-            <EnhancedTableBody
-              order={order}
-              orderBy={orderBy}
-              users={users}
-              themeStyles={themeStyles}
-            />
-          </Table>
-        </TableContainer>
+        {users.length !== 0 ? (
+          <TableContainer component={Paper} style={themeStyles}>
+            <Table aria-label="simple table">
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleSort}
+                themeStyles={themeStyles}
+              />
+              <EnhancedTableBody
+                order={order}
+                orderBy={orderBy}
+                users={users}
+                themeStyles={themeStyles}
+              />
+            </Table>
+          </TableContainer>
+        ) : (
+          <NoUsers />
+        )}
       </Grid>
 
       <DeleteUserModal
@@ -138,6 +159,8 @@ export const UsersList = () => {
       />
 
       <NewUserModal callbackAfterConfirmClick={createUser} />
+
+      <EditUserModal callbackAfterConfirmClick={editUser} />
 
       <Notification />
     </>

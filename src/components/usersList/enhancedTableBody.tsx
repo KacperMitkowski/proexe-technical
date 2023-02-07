@@ -39,7 +39,22 @@ export const EnhancedTableBody = ({
             <TableCell style={themeStyles}>{user.email}</TableCell>
             <TableCell style={themeStyles}>{user.city}</TableCell>
             <TableCell>
-              <Button variant="contained">Edit</Button>
+              <Button
+                onClick={() =>
+                  commonContext.dispatch({
+                    type: COMMON_ACTIONS.OPEN_EDIT_USER_MODAL_ACTION,
+                    // payload: {
+                    //   userId: user.id,
+                    // },
+                    payload: {
+                      user,
+                    },
+                  })
+                }
+                variant="contained"
+              >
+                Edit
+              </Button>
             </TableCell>
             <TableCell>
               <Button
