@@ -1,18 +1,15 @@
 import { Button, CircularProgress, Grid, Typography } from "@mui/material";
+import { flexWithCentralize, fullHeight } from ".";
 
 interface IProps {
-  classes: {
-    containerClass: string;
-    itemClass: string;
-  };
   size: number;
   thickness: number;
 }
 
-export const Spinner = ({ classes, size, thickness }: IProps) => {
+export const Spinner = ({ size, thickness }: IProps) => {
   return (
-    <Grid container className={classes.containerClass}>
-      <Grid item xs={12} className={classes.itemClass}>
+    <Grid container style={fullHeight}>
+      <Grid item xs={12} style={flexWithCentralize}>
         <CircularProgress size={size} thickness={thickness} />
       </Grid>
     </Grid>

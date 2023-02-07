@@ -16,7 +16,6 @@ import {
   LIGHT_MODE_BACKGROUND_COLOR,
   LIGHT_MODE_FONT_COLOR,
 } from "../../styles/consts";
-import { useGlobalStyles } from "../../styles/styles";
 import { Order, User } from "../../types";
 import { EnhancedTableBody, EnhancedTableHead, NoUsers } from ".";
 import { ErrorMessage, Spinner } from "../common";
@@ -33,7 +32,6 @@ const refreshPageHandler = () => PageHelper.refreshPage();
 
 export const UsersList = () => {
   // styles
-  const globalClasses = useGlobalStyles();
   const { isDarkTheme } = useContext(ThemeContext);
   const themeStyles = {
     color: isDarkTheme ? DARK_MODE_FONT_COLOR : LIGHT_MODE_FONT_COLOR,
@@ -74,31 +72,24 @@ export const UsersList = () => {
   };
 
   return actionExecuting ? (
-    <Spinner
-      classes={{
-        containerClass: globalClasses.fullHeight,
-        itemClass: globalClasses.flexWithCentralize,
-      }}
-      size={100}
-      thickness={2}
-    />
+    <Spinner size={100} thickness={2} />
   ) : error ? (
     <ErrorMessage
       error={error}
-      classes={{
-        containerClass: globalClasses.fullHeight,
-        itemClass: globalClasses.flexWithCentralize,
-      }}
       buttonAction={refreshPageHandler}
       buttonText="Refresh page"
     />
   ) : (
     <>
       <Grid
-        className={globalClasses.fullHeight}
+        style={{
+          height: "100vh",
+          backgroundColor: isDarkTheme
+            ? DARK_MODE_BACKGROUND_COLOR
+            : LIGHT_MODE_BACKGROUND_COLOR,
+        }}
         padding={5}
         container
-        style={themeStyles}
       >
         <Grid item xs={12}>
           <Typography style={themeStyles} variant="h2">

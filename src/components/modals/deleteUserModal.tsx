@@ -1,8 +1,8 @@
 import { Button, Typography } from "@mui/material";
 import { useContext } from "react";
+import { deleteUserModalStyle } from ".";
 import { CommonContext } from "../../contexts";
 import { COMMON_ACTIONS } from "../../reducers";
-import { useGlobalStyles } from "../../styles/styles";
 import { CustomModal } from "../common";
 
 interface IProps {
@@ -11,7 +11,6 @@ interface IProps {
 
 export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
   const commonContext = useContext(CommonContext);
-  const globalClasses = useGlobalStyles();
 
   return (
     <CustomModal
@@ -24,7 +23,7 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
         });
       }}
-      customClass={globalClasses.deleteUserModal}
+      style={deleteUserModalStyle}
     >
       <Typography variant="h5" mb={2}>
         Do you want to delete user with id: &nbsp;

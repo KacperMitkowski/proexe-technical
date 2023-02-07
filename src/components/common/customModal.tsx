@@ -4,20 +4,15 @@ interface IProps {
   modalOpen: boolean;
   close?: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
   children: any;
-  customClass?: string;
+  style?: object;
 }
 
-export const CustomModal = ({
-  modalOpen,
-  close,
-  children,
-  customClass,
-}: IProps) => {
+export const CustomModal = ({ modalOpen, close, children, style }: IProps) => {
   if (!modalOpen) return <></>;
 
   return (
     <Modal keepMounted open onClose={close}>
-      <Box className={customClass}>{children}</Box>
+      <Box style={style}>{children}</Box>
     </Modal>
   );
 };

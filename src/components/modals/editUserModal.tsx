@@ -1,9 +1,9 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
+import { editUserModalStyle } from ".";
 import { CommonContext } from "../../contexts";
 import { EmailHelper } from "../../helpers";
 import { COMMON_ACTIONS } from "../../reducers";
-import { useGlobalStyles } from "../../styles/styles";
 import { CustomModal } from "../common";
 
 interface IProps {
@@ -14,7 +14,6 @@ const HELPER_TEXT = "Required field";
 
 export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
   const commonContext = useContext(CommonContext);
-  const globalClasses = useGlobalStyles();
   const editedUser = commonContext.globalState.editedUser;
 
   const handleInputChange = (event) => {
@@ -45,7 +44,7 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
           type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
         });
       }}
-      customClass={globalClasses.editUserModal}
+      style={editUserModalStyle}
     >
       <Typography variant="h4" mb={2}>
         Edit User
@@ -55,7 +54,6 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Grid item xs={12} mb={1}>
           <TextField
             fullWidth
-            autoFocus
             error={editedUser?.name?.trim() === ""}
             value={editedUser?.name}
             name="name"
@@ -68,7 +66,6 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         <Grid item xs={12} mt={1}>
           <TextField
             fullWidth
-            autoFocus
             error={
               editedUser?.email?.trim() === "" ||
               !EmailHelper.isEmailOk(

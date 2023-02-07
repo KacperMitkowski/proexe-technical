@@ -6,7 +6,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { useGlobalStyles } from "../../styles/styles";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import GroupIcon from "@mui/icons-material/Group";
@@ -22,12 +21,9 @@ import {
 } from "../../styles/consts";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
-import { useLocalStyles } from ".";
 
 export const Navbar = () => {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
-  const globalClasses = useGlobalStyles();
-  const localClasses = useLocalStyles();
   const themeStyles = {
     color: isDarkTheme ? DARK_MODE_FONT_COLOR : LIGHT_MODE_FONT_COLOR,
     backgroundColor: isDarkTheme
@@ -37,7 +33,6 @@ export const Navbar = () => {
 
   return (
     <Drawer
-      className={globalClasses.drawer}
       variant="permanent"
       sx={{
         width: DRAWER_WIDTH,
@@ -58,11 +53,10 @@ export const Navbar = () => {
       <List disablePadding>
         <ListItem
           disablePadding
-          className={localClasses.navbarItem}
           title="About us"
           onClick={() => alert("About us")}
         >
-          <ListItemButton className={globalClasses.fullWidth}>
+          <ListItemButton>
             <ListItemIcon>
               <InboxIcon style={themeStyles} />
             </ListItemIcon>
@@ -71,50 +65,34 @@ export const Navbar = () => {
         </ListItem>
         <ListItem
           disablePadding
-          className={localClasses.navbarItem}
           title="Contact"
           onClick={() => alert("Contact")}
         >
-          <ListItemButton className={globalClasses.fullWidth}>
+          <ListItemButton>
             <ListItemIcon>
               <MailIcon style={themeStyles} />
             </ListItemIcon>
             <ListItemText primary="Contact" />
           </ListItemButton>
         </ListItem>
-        <ListItem
-          disablePadding
-          className={localClasses.navbarItem}
-          title="Users"
-          onClick={() => alert("Users")}
-        >
-          <ListItemButton className={globalClasses.fullWidth}>
+        <ListItem disablePadding title="Users" onClick={() => alert("Users")}>
+          <ListItemButton>
             <ListItemIcon>
               <GroupIcon style={themeStyles} />
             </ListItemIcon>
             <ListItemText primary="Users" />
           </ListItemButton>
         </ListItem>
-        <ListItem
-          disablePadding
-          className={localClasses.navbarItem}
-          title="Logout"
-          onClick={() => alert("Logout")}
-        >
-          <ListItemButton className={globalClasses.fullWidth}>
+        <ListItem disablePadding title="Logout" onClick={() => alert("Logout")}>
+          <ListItemButton>
             <ListItemIcon>
               <LogoutIcon style={themeStyles} />
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
-        <ListItem
-          disablePadding
-          className={localClasses.navbarItem}
-          title="Users"
-          onClick={() => toggleTheme()}
-        >
-          <ListItemButton className={globalClasses.fullWidth}>
+        <ListItem disablePadding title="Users" onClick={() => toggleTheme()}>
+          <ListItemButton>
             <ListItemIcon>
               {isDarkTheme ? (
                 <LightModeIcon style={themeStyles} />

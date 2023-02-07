@@ -7,14 +7,12 @@ interface IProps {
 
 export const Layout = ({ children }: IProps) => {
   return (
-    <>
-      <Box sx={{ display: "flex", height: "100%" }}>
-        <CssBaseline />
+    <Box sx={{ display: "flex", height: "100%" }}>
+      <CssBaseline />
 
-        <Navbar />
+      <Navbar />
 
-        {children}
-      </Box>
-    </>
+      {children}
+    </Box>
   );
 };

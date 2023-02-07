@@ -1,9 +1,9 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
+import { newUserModalStyle } from ".";
 import { CommonContext } from "../../contexts";
 import { EmailHelper } from "../../helpers";
 import { COMMON_ACTIONS } from "../../reducers";
-import { useGlobalStyles } from "../../styles/styles";
 import { User } from "../../types";
 import { CustomModal } from "../common";
 
@@ -15,7 +15,7 @@ const HELPER_TEXT = "Required field";
 
 export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
   const commonContext = useContext(CommonContext);
-  const globalClasses = useGlobalStyles();
+
   const [newUser, setNewUser] = useState<User>(new User());
 
   const handleInputChange = (event) => {
@@ -45,7 +45,7 @@ export const NewUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         });
         resetUser();
       }}
-      customClass={globalClasses.newUserModal}
+      style={newUserModalStyle}
     >
       <Typography variant="h4" mb={2}>
         New User
