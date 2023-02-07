@@ -43,21 +43,20 @@ export const EnhancedTableBody = ({
                 onClick={() =>
                   commonContext.dispatch({
                     type: COMMON_ACTIONS.OPEN_EDIT_USER_MODAL_ACTION,
-                    // payload: {
-                    //   userId: user.id,
-                    // },
                     payload: {
                       user,
                     },
                   })
                 }
                 variant="contained"
+                color="warning"
               >
                 Edit
               </Button>
             </TableCell>
             <TableCell>
               <Button
+                color="error"
                 variant="contained"
                 onClick={() =>
                   commonContext.dispatch({

@@ -33,6 +33,7 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
 
       <div style={{ position: "absolute", bottom: 10 }}>
         <Button
+          color="error"
           onClick={() => {
             callbackAfterConfirmClick();
             commonContext.dispatch({
@@ -46,7 +47,7 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
             });
           }}
           variant="contained"
-          style={{ backgroundColor: "red", marginRight: 10 }}
+          style={{ marginRight: 10 }}
         >
           Yes
         </Button>
@@ -60,6 +61,7 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
             });
           }}
           variant="contained"
+          color="warning"
         >
           No
         </Button>

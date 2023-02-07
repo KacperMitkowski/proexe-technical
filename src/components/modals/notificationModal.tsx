@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CommonContext } from "../../contexts";
 import { COMMON_ACTIONS } from "../../reducers";
 
-export const Notification = () => {
+export const NotificationModal = () => {
   const commonContext = useContext(CommonContext);
 
   const handleClose = (

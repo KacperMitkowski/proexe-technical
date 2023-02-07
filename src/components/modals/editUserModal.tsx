@@ -114,6 +114,21 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
 
       <div style={{ position: "absolute", bottom: 10 }}>
         <Button
+          onClick={() => {
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+            });
+            commonContext.dispatch({
+              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+            });
+          }}
+          variant="outlined"
+          style={{ marginRight: 10 }}
+          color="error"
+        >
+          Cancel
+        </Button>
+        <Button
           disabled={isFormDisabled()}
           onClick={async () => {
             await callbackAfterConfirmClick(editedUser);
@@ -128,22 +143,9 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
             });
           }}
           variant="contained"
-          style={{ backgroundColor: "#28c96e", marginRight: 10 }}
+          color="success"
         >
           Submit
-        </Button>
-        <Button
-          onClick={() => {
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
-            });
-          }}
-          variant="outlined"
-        >
-          Cancel
         </Button>
       </div>
     </CustomModal>

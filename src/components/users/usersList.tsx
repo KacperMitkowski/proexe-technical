@@ -32,7 +32,7 @@ import {
   DeleteUserModal,
   EditUserModal,
   NewUserModal,
-  Notification,
+  NotificationModal,
 } from "../modals";
 
 const refreshPageHandler = () => PageHelper.refreshPage();
@@ -162,7 +162,7 @@ export const UsersList = () => {
 
       <EditUserModal callbackAfterConfirmClick={editUser} />
 
-      <Notification />
+      <NotificationModal />
     </>
   );
 };

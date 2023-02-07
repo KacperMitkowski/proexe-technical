@@ -2,7 +2,7 @@ import { useReducer, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Layout } from "./components/layout";
-import { UsersList } from "./components/usersList";
+import { UsersList } from "./components/users";
 import { CommonContext } from "./contexts";
 import { ThemeContext } from "./contexts/themeContext";
 import { initialState, commonReducer } from "./reducers";
