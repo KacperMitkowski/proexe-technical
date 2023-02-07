@@ -28,6 +28,12 @@ export const Navbar = () => {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
   const globalClasses = useGlobalStyles();
   const localClasses = useLocalStyles();
+  const themeStyles = {
+    color: isDarkTheme ? DARK_MODE_FONT_COLOR : LIGHT_MODE_FONT_COLOR,
+    backgroundColor: isDarkTheme
+      ? DARK_MODE_BACKGROUND_COLOR
+      : LIGHT_MODE_BACKGROUND_COLOR,
+  };
 
   return (
     <Drawer
@@ -53,77 +59,53 @@ export const Navbar = () => {
         <ListItem
           disablePadding
           className={localClasses.navbarItem}
-          title="Users"
-          onClick={() => alert("Action 1")}
+          title="About us"
+          onClick={() => alert("About us")}
         >
           <ListItemButton className={globalClasses.fullWidth}>
             <ListItemIcon>
-              <InboxIcon
-                style={{
-                  color: isDarkTheme
-                    ? DARK_MODE_FONT_COLOR
-                    : LIGHT_MODE_FONT_COLOR,
-                }}
-              />
+              <InboxIcon style={themeStyles} />
             </ListItemIcon>
-            <ListItemText primary="Action 1" />
+            <ListItemText primary="About us" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          disablePadding
+          className={localClasses.navbarItem}
+          title="Contact"
+          onClick={() => alert("Contact")}
+        >
+          <ListItemButton className={globalClasses.fullWidth}>
+            <ListItemIcon>
+              <MailIcon style={themeStyles} />
+            </ListItemIcon>
+            <ListItemText primary="Contact" />
           </ListItemButton>
         </ListItem>
         <ListItem
           disablePadding
           className={localClasses.navbarItem}
           title="Users"
-          onClick={() => alert("Action 2")}
+          onClick={() => alert("Users")}
         >
           <ListItemButton className={globalClasses.fullWidth}>
             <ListItemIcon>
-              <MailIcon
-                style={{
-                  color: isDarkTheme
-                    ? DARK_MODE_FONT_COLOR
-                    : LIGHT_MODE_FONT_COLOR,
-                }}
-              />
+              <GroupIcon style={themeStyles} />
             </ListItemIcon>
-            <ListItemText primary="Action 2" />
+            <ListItemText primary="Users" />
           </ListItemButton>
         </ListItem>
         <ListItem
           disablePadding
           className={localClasses.navbarItem}
-          title="Users"
-          onClick={() => alert("Action 3")}
+          title="Logout"
+          onClick={() => alert("Logout")}
         >
           <ListItemButton className={globalClasses.fullWidth}>
             <ListItemIcon>
-              <GroupIcon
-                style={{
-                  color: isDarkTheme
-                    ? DARK_MODE_FONT_COLOR
-                    : LIGHT_MODE_FONT_COLOR,
-                }}
-              />
+              <LogoutIcon style={themeStyles} />
             </ListItemIcon>
-            <ListItemText primary="Action 3" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem
-          disablePadding
-          className={localClasses.navbarItem}
-          title="Users"
-          onClick={() => alert("Action 4")}
-        >
-          <ListItemButton className={globalClasses.fullWidth}>
-            <ListItemIcon>
-              <LogoutIcon
-                style={{
-                  color: isDarkTheme
-                    ? DARK_MODE_FONT_COLOR
-                    : LIGHT_MODE_FONT_COLOR,
-                }}
-              />
-            </ListItemIcon>
-            <ListItemText primary="Action 4" />
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
         <ListItem
@@ -135,21 +117,9 @@ export const Navbar = () => {
           <ListItemButton className={globalClasses.fullWidth}>
             <ListItemIcon>
               {isDarkTheme ? (
-                <LightModeIcon
-                  style={{
-                    color: isDarkTheme
-                      ? DARK_MODE_FONT_COLOR
-                      : LIGHT_MODE_FONT_COLOR,
-                  }}
-                />
+                <LightModeIcon style={themeStyles} />
               ) : (
-                <DarkModeIcon
-                  style={{
-                    color: isDarkTheme
-                      ? DARK_MODE_FONT_COLOR
-                      : LIGHT_MODE_FONT_COLOR,
-                  }}
-                />
+                <DarkModeIcon style={themeStyles} />
               )}
             </ListItemIcon>
             <ListItemText

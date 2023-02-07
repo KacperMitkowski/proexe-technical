@@ -31,41 +31,39 @@ export const DeleteUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         {commonContext.globalState.deletedUserId}?
       </Typography>
 
-      <div style={{ position: "absolute", bottom: 10 }}>
-        <Button
-          color="error"
-          onClick={() => {
-            callbackAfterConfirmClick();
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
-            });
-          }}
-          variant="contained"
-          style={{ marginRight: 10 }}
-        >
-          Yes
-        </Button>
-        <Button
-          onClick={() => {
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
-            });
-          }}
-          variant="contained"
-          color="warning"
-        >
-          No
-        </Button>
-      </div>
+      <Button
+        color="error"
+        onClick={() => {
+          callbackAfterConfirmClick();
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
+          });
+        }}
+        variant="contained"
+        style={{ marginRight: 10 }}
+      >
+        Yes
+      </Button>
+      <Button
+        onClick={() => {
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.RESET_DELETED_USER_ID_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+          });
+        }}
+        variant="contained"
+        color="warning"
+      >
+        No
+      </Button>
     </CustomModal>
   );
 };

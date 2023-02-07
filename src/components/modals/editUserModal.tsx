@@ -27,15 +27,12 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
     });
   };
 
-  const isFormDisabled = () => {
-    return (
-      editedUser?.name?.trim() === "" ||
-      editedUser?.email?.trim() === "" ||
-      !EmailHelper.isEmailOk(editedUser?.email?.trim()) ||
-      editedUser?.username?.trim() === "" ||
-      editedUser?.city?.trim() === ""
-    );
-  };
+  const isFormDisabled = () =>
+    editedUser?.name?.trim() === "" ||
+    editedUser?.email?.trim() === "" ||
+    !EmailHelper.isEmailOk(editedUser?.email?.trim()) ||
+    editedUser?.username?.trim() === "" ||
+    editedUser?.city?.trim() === "";
 
   return (
     <CustomModal
@@ -112,42 +109,40 @@ export const EditUserModal = ({ callbackAfterConfirmClick }: IProps) => {
         </Grid>
       </Grid>
 
-      <div style={{ position: "absolute", bottom: 10 }}>
-        <Button
-          onClick={() => {
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
-            });
-          }}
-          variant="outlined"
-          style={{ marginRight: 10 }}
-          color="error"
-        >
-          Cancel
-        </Button>
-        <Button
-          disabled={isFormDisabled()}
-          onClick={async () => {
-            await callbackAfterConfirmClick(editedUser);
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
-            });
-            commonContext.dispatch({
-              type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
-            });
-          }}
-          variant="contained"
-          color="success"
-        >
-          Submit
-        </Button>
-      </div>
+      <Button
+        onClick={() => {
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+          });
+        }}
+        variant="outlined"
+        style={{ marginRight: 10 }}
+        color="error"
+      >
+        Cancel
+      </Button>
+      <Button
+        disabled={isFormDisabled()}
+        onClick={async () => {
+          await callbackAfterConfirmClick(editedUser);
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.RESET_EDITED_USER_MODAL_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.CLOSE_ALL_MODALS_ACTION,
+          });
+          commonContext.dispatch({
+            type: COMMON_ACTIONS.OPEN_NOTIFICATION_MODAL_ACTION,
+          });
+        }}
+        variant="contained"
+        color="success"
+      >
+        Submit
+      </Button>
     </CustomModal>
   );
 };

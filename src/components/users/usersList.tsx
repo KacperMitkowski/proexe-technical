@@ -4,7 +4,6 @@ import {
   Paper,
   Table,
   TableContainer,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
@@ -19,13 +18,8 @@ import {
 } from "../../styles/consts";
 import { useGlobalStyles } from "../../styles/styles";
 import { Order, User } from "../../types";
-import {
-  EnhancedTableBody,
-  EnhancedTableHead,
-  NoUsers,
-  useLocalStyles,
-} from ".";
-import { CustomModal, ErrorMessage, Spinner } from "../common";
+import { EnhancedTableBody, EnhancedTableHead, NoUsers } from ".";
+import { ErrorMessage, Spinner } from "../common";
 import { CommonContext } from "../../contexts";
 import { COMMON_ACTIONS } from "../../reducers/commonReducer";
 import {
@@ -123,30 +117,32 @@ export const UsersList = () => {
                 type: COMMON_ACTIONS.OPEN_NEW_USER_MODAL_ACTION,
               })
             }
-            className={globalClasses.button}
             variant="contained"
+            color="warning"
           >
             Add new
           </Button>
         </Grid>
 
         {users.length !== 0 ? (
-          <TableContainer component={Paper} style={themeStyles}>
-            <Table aria-label="simple table">
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleSort}
-                themeStyles={themeStyles}
-              />
-              <EnhancedTableBody
-                order={order}
-                orderBy={orderBy}
-                users={users}
-                themeStyles={themeStyles}
-              />
-            </Table>
-          </TableContainer>
+          <Grid xs={12}>
+            <TableContainer component={Paper} style={themeStyles}>
+              <Table aria-label="simple table">
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleSort}
+                  themeStyles={themeStyles}
+                />
+                <EnhancedTableBody
+                  order={order}
+                  orderBy={orderBy}
+                  users={users}
+                  themeStyles={themeStyles}
+                />
+              </Table>
+            </TableContainer>
+          </Grid>
         ) : (
           <NoUsers />
         )}

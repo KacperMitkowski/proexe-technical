@@ -20,7 +20,21 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
   resetPaddingBottom: {
     paddingBottom: 0,
   },
-
+  resetMargin: {
+    margin: 0,
+  },
+  resetMarginTop: {
+    marginTop: 0,
+  },
+  resetMarginLeft: {
+    marginLeft: 0,
+  },
+  resetMarginRight: {
+    marginRight: 0,
+  },
+  resetMarginBottom: {
+    marginBottom: 0,
+  },
   fullWidth: {
     width: "100%",
   },
@@ -28,51 +42,39 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
   fullHeight: {
     height: "100vh",
   },
-
-  button: {
-    height: 50,
-    width: 150,
-  },
-
   flexWithCentralize: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-
   deleteUserModal: {
-    position: "absolute" as "absolute",
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
-
-    width: "30%",
-    height: "20%",
-    top: "25vh",
-    left: "70vh",
+    left: "25%",
+    width: "50%",
+    position: "relative",
+    top: "50%",
+    transform: "translateY(-50%)",
   },
-
   newUserModal: {
-    position: "absolute" as "absolute",
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
-
-    width: "30%",
-    height: "40%",
-    top: "25vh",
-    left: "70vh",
+    left: "25%",
+    width: "50%",
+    position: "relative",
+    top: "50%",
+    transform: "translateY(-50%)",
   },
-
   editUserModal: {
-    position: "absolute" as "absolute",
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
-
-    width: "30%",
-    height: "50%",
-    top: "25vh",
-    left: "70vh",
+    left: "25%",
+    width: "50%",
+    position: "relative",
+    top: "50%",
+    transform: "translateY(-50%)",
   },
 }));
