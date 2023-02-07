@@ -4,6 +4,7 @@ import {
   Paper,
   Table,
   TableContainer,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
@@ -19,9 +20,10 @@ import {
 import { useGlobalStyles } from "../../styles/styles";
 import { Order, User } from "../../types";
 import { EnhancedTableBody, EnhancedTableHead, useLocalStyles } from ".";
-import { ErrorMessage, Spinner } from "../common";
+import { CustomModal, ErrorMessage, Spinner } from "../common";
 import { CommonContext } from "../../contexts";
 import { COMMON_ACTIONS } from "../../reducers/commonReducer";
+import { DeleteUserModal, NewUserModal, Notification } from "../modals";
 
 const refreshPageHandler = () => PageHelper.refreshPage();
 
@@ -42,6 +44,7 @@ export const UsersList = () => {
     userFacade;
 
   // state
+  const commonContext = useContext(CommonContext);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof User>("id");
 
@@ -79,44 +82,64 @@ export const UsersList = () => {
       buttonText="Refresh page"
     />
   ) : (
-    <Grid
-      className={globalClasses.fullHeight}
-      padding={5}
-      container
-      style={themeStyles}
-    >
-      <Grid item xs={12}>
-        <Typography style={themeStyles} variant="h2">
-          Dashboard
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography variant="h5" style={themeStyles}>
-          User list
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Button className={globalClasses.button} variant="contained">
-          Add new
-        </Button>
+    <>
+      <Grid
+        className={globalClasses.fullHeight}
+        padding={5}
+        container
+        style={themeStyles}
+      >
+        <Grid item xs={12}>
+          <Typography style={themeStyles} variant="h2">
+            Dashboard
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h5" style={themeStyles}>
+            User list
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            onClick={() =>
+              commonContext.dispatch({
+                type: COMMON_ACTIONS.OPEN_NEW_USER_MODAL_ACTION,
+              })
+            }
+            className={globalClasses.button}
+            variant="contained"
+          >
+            Add new
+          </Button>
+        </Grid>
+
+        <TableContainer component={Paper} style={themeStyles}>
+          <Table aria-label="simple table">
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleSort}
+              themeStyles={themeStyles}
+            />
+            <EnhancedTableBody
+              order={order}
+              orderBy={orderBy}
+              users={users}
+              themeStyles={themeStyles}
+            />
+          </Table>
+        </TableContainer>
       </Grid>
 
-      <TableContainer component={Paper} style={themeStyles}>
-        <Table aria-label="simple table">
-          <EnhancedTableHead
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleSort}
-            themeStyles={themeStyles}
-          />
-          <EnhancedTableBody
-            order={order}
-            orderBy={orderBy}
-            users={users}
-            themeStyles={themeStyles}
-          />
-        </Table>
-      </TableContainer>
-    </Grid>
+      <DeleteUserModal
+        callbackAfterConfirmClick={async () =>
+          await deleteUser(commonContext.globalState.deletedUserId)
+        }
+      />
+
+      <NewUserModal callbackAfterConfirmClick={createUser} />
+
+      <Notification />
+    </>
   );
 };

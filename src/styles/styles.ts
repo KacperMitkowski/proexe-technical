@@ -40,14 +40,26 @@ export const useGlobalStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
   },
 
-  deleteModal: {
+  deleteUserModal: {
     position: "absolute" as "absolute",
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
 
     width: "30%",
-    height: "30%",
+    height: "20%",
+    top: "25vh",
+    left: "70vh",
+  },
+
+  newUserModal: {
+    position: "absolute" as "absolute",
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "10px",
+
+    width: "30%",
+    height: "40%",
     top: "25vh",
     left: "70vh",
   },
